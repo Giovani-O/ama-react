@@ -2,7 +2,8 @@ import { useParams } from 'react-router-dom'
 import amaLogo from '../../assets/ama-logo.svg'
 import { ArrowRight, Share2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { Message } from '../../components/message'
+import { Messages } from '../../components/messages'
+import { Suspense } from 'react'
 
 export function Room() {
   const { roomId } = useParams()
@@ -58,15 +59,9 @@ export function Room() {
         </button>
       </form>
 
-      <ol className="list-decimal list-outside px-3 space-y-8">
-        <Message
-          text="lorem ipsum dolor sit amet"
-          amountOfReactions={408}
-          answered
-        />
-        <Message text="lorem ipsum dolor sit amet" amountOfReactions={86} />
-        <Message text="lorem ipsum dolor sit amet" amountOfReactions={0} />
-      </ol>
+      <Suspense fallback={<p>Carregando...</p>}>
+        <Messages />
+      </Suspense>
     </header>
   )
 }
